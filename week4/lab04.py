@@ -134,6 +134,18 @@ else:
 if weapons[weaponRoll - 1] != "Fist":
     print("--- Thank goodness you didn't roll the Fist...")
 
+# Q1. python dictionary for monster powers (handled like hero's weapon)
+monster_powers = {"Fire Magic": 2, "Freeze Time": 4, "Super Hearing": 6}
+
+# Q2. roll for random monster power
+input("Roll the dice for the monster's power (Press enter)")
+m_power_roll = random.choice(monster_powers)
+
+# Q3. add monster power's value to monster's combat strength, cannot be more than 6
+m_combat_strength += monster_powers[m_power_roll]
+m_combat_strength = min(6, (m_combat_strength + 2))
+print ("The monster's power is " + str(monster_powers.keys()[m_power_roll - 1]) + " and its combat strength is " + str(m_combat_strength))
+
 # Roll for player health points
 input("Roll the dice for your health points (Press enter)")
 health_points = random.choice(diceOptions)
@@ -147,40 +159,6 @@ print("Player rolled " + str(m_health_points) + " health points for the monster"
 input("Analyze the roll (Press enter)")
 # Compare Player vs Monster's strength
 print("--- You are matched in strength: " + str(combat_strength == m_combat_strength))
-
-# Check the Player's overall strength and health
-print("--- You have a strong player: " + str((combat_strength + health_points) >= 15))
-
-# Loop while the monster and the player are alive. Call fight sequence functions
-print("You meet the monster. FIGHT!!")
-while m_health_points > 0 and health_points > 0:
-
-    input("You strike first (Press Enter)")
-    m_health_points = hero_attacks(combat_strength, m_health_points)
-    if m_health_points == 0:
-        num_stars = 3
-    else:
-        input("The monster strikes (Press Enter)")
-        health_points = monster_attacks(m_combat_strength, health_points)
-        if health_points == 0:
-            num_stars = 1
-        else:
-            num_stars = 2
-
-stars = "*" * num_stars
-print("Hero gets <" + stars + "> stars")
-
-# Q1. python dictionary for monster powers (handled like hero's weapon)
-monster_powers = {"Fire Magic": 2, "Freeze Time": 4, "Super Hearing": 6}
-
-# Q2. roll for random monster power
-input("Roll the dice for the monster's power (Press enter)")
-m_power_roll = random.choice(monster_powers)
-
-# Q3. add monster power's value to monster's combat strength, cannot be more than 6
-m_combat_strength += monster_powers[m_power_roll]
-m_combat_strength = min(6, (m_combat_strength + 2))
-print ("The monster's power is " + str(monster_powers.keys()[m_power_roll - 1]) + " and its combat strength is " + str(m_combat_strength))
 
 # Q4. define new array called belt
 belt = []
@@ -212,8 +190,30 @@ for i in range(0, len(good_loot_options) + 1):
     elif heldLootItem == bad_loot_options[i]:
         health_points = max(0, (health_points - 2))
     else:
-        print ("It's not that helpful, you're better off just chucking it away")
-        heldLootItem.pop()
-    print ("You have used the " + heldLootItem + " and your health is now " + str(health_points) + "!")
+        print ("It's not that helpful, you're better off just chucking it away")    
+    print (f"You have used the {heldLootItem} and your health is now " + str(health_points) + "!")
+    heldLootItem.pop()
+
+# Check the Player's overall strength and health
+print("--- You have a strong player: " + str((combat_strength + health_points) >= 15))
+
+# Loop while the monster and the player are alive. Call fight sequence functions
+print("You meet the monster. FIGHT!!")
+while m_health_points > 0 and health_points > 0:
+
+    input("You strike first (Press Enter)")
+    m_health_points = hero_attacks(combat_strength, m_health_points)
+    if m_health_points == 0:
+        num_stars = 3
+    else:
+        input("The monster strikes (Press Enter)")
+        health_points = monster_attacks(m_combat_strength, health_points)
+        if health_points == 0:
+            num_stars = 1
+        else:
+            num_stars = 2
+
+stars = "*" * num_stars
+print("Hero gets <" + stars + "> stars")
 
 # move the Questions (Q1-Q8) into the correct places in the code, i.e. loot before you fight the monster
