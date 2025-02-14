@@ -141,9 +141,9 @@ def inception_dream(num_dream_lvls):
 def save_game(winner, hero_name="", num_stars=0):
     with open("save.txt") as savefile:
         if winner == "Hero":
-            savefile.write(f"Hero {hero_name} has killed the monster and earned {num_stars} stars!\n")
+            savefile.write(f"Hero {hero_name} has killed a monster and earned {num_stars} stars!\n")
         elif winner == "Monster":
-            savefile.write(f"The monster has killed the hero {hero_name}!\n")
+            savefile.write(f"The monster killed the hero {hero_name}!\n")
         savefile.close()
 
 # Lab Week 6: Question 5a
@@ -158,3 +158,19 @@ def load_game():
                 return last_line
     except FileNotFoundError:
         print("   |   No save file found. Starting a new game.")
+        return None
+
+# Lab Week 6: Question 5b
+def adjust_combat_strength(combat_strength, m_combat_strength):
+    last_game_result = load_game()
+    if last_game_result:
+        if "Hero" in last_game_result and "earned" in last_game_result:
+            num_stars = int(last_game_result.split(" ")[-2])
+            if num_star > 3:
+                print("   |   Increasing the Monster's combat strength...")
+                m_combat_strength += 1
+        elif "monster killed the hero" in last_game_result:
+            print("   |   Increasing the Hero's combat strength...")
+            combat_strength += 1
+        else:
+            print("   |   No need to adjust combat strength...")            
