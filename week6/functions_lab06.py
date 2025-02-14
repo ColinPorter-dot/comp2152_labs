@@ -48,7 +48,7 @@ def collect_loot(loot_options, belt):
     return loot_options, belt
 
 
-# Hero's Attack Function
+# Hero's Attack Function (:3)
 def hero_attacks(combat_strength, m_health_points):
     ascii_image = """
                                 @@   @@ 
