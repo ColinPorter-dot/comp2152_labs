@@ -166,7 +166,7 @@ def adjust_combat_strength(combat_strength, m_combat_strength):
     if last_game_result:
         if "Hero" in last_game_result and "earned" in last_game_result:
             num_stars = int(last_game_result.split(" ")[-2])
-            if num_star > 3:
+            if num_stars > 3:
                 print("   |   Increasing the Monster's combat strength...")
                 m_combat_strength += 1
         elif "monster killed the hero" in last_game_result:
