@@ -239,7 +239,10 @@ if not input_invalid:
                     num_stars = 3
                 else:
                     num_stars = 2
-
+        if (m_health_points == 0):
+            winner = "Hero"
+        else:
+            winner = "Monster"
     # Final Score Display
     tries = 0
     input_invalid = True
