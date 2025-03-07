@@ -268,4 +268,3 @@ if not input_invalid:
         print("    |    Hero " + short_name + " gets <" + stars_display + "> stars")
         # Lab Week 6: Question 3 & 4
         functions_lab06.save_game(winner, hero_name=short_name, num_stars=num_stars)
-
